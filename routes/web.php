@@ -35,7 +35,7 @@ Route::get('/admin/dashboard', function () {
 Route::get('/admin/formLegal', [LegalFormController::class, 'showForm'])->middleware(\App\Http\Middleware\RoleMiddleware::class.':admin')->name('form.legal');
 Route::post('/admin/formLegal', [LegalFormController::class, 'submitForm'])->middleware(\App\Http\Middleware\RoleMiddleware::class.':admin')->name('form.legal.submit');
 
-Route::get('/admin/articles/edit', [AdminController::class, 'editArticles'])->name('admin.articles.edit')->middleware(\App\Http\Middleware\RoleMiddleware::class.':admin');
+Route::get('/admin/articles/edit', [AdminController::class, 'editArticles'])->name('admin.articles.edit')->middleware(\App\Http\Middleware\RoleMiddleware::class.':editor');
 
 // Route::post('/consume-api', [ApiController::class, 'login']);
 Route::get('/login', [ApiController::class, 'showLoginForm'])->name('login.form');

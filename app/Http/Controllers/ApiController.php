@@ -52,7 +52,14 @@ class ApiController extends Controller
             $userData = $data['data'];
 
             // Determine role based on departmentId
-            $role = $userData['departmentId'] == "8" ? 'admin' : 'user';
+            // $role = $userData['departmentId'] == "8" ? 'admin' : 'user';
+            if ($userData['departmentId'] == "8") {
+                $role = "admin";
+            } elseif ($userData['departmentId'] == "12") {
+                $role = "editor";
+            } else {
+                $role = "user";
+            }
 
             // Store user-specific data in the session
             session([
