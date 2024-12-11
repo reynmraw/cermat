@@ -84,9 +84,7 @@ class ApiController extends Controller
             Auth::login($user,true);
 
             // Redirect to the dashboard
-            return $role === 'admin' 
-                ? redirect()->route('admin.dashboard') 
-                : redirect()->route('dashboard');
+            return redirect()->route('dashboard');
         } else {
             return redirect()->route('login.form')->with('error', 'Unexpected API response format.');
         }

@@ -5,15 +5,19 @@ use App\Http\Controllers\ApiController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LegalFormController;
+use App\Http\Controllers\DashboardController;
+
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard')->middleware('auth.role:user');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard')->middleware('auth.role:user');
 
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 // Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth.role:admin');
 // Route::get('/admin/dashboard', function () {
 //     return view('admin.dashboard');
@@ -24,13 +28,13 @@ Route::get('/dashboard', function () {
 //     return 'Admin Dashboard';
 // })->name('admin.dashboard')->middleware(\App\Http\Middleware\RoleMiddleware::class.':admin');
 
-Route::get('/admin/dashboard', function () {
-    if (Auth::check()) {
-        return view('admin.dashboard');
-    } else {
-        return 'Not Authenticated';
-    }
-})->middleware(\App\Http\Middleware\RoleMiddleware::class.':admin')->name('admin.dashboard');
+// Route::get('/admin/dashboard', function () {
+//     if (Auth::check()) {
+//         return view('admin.dashboard');
+//     } else {
+//         return 'Not Authenticated';
+//     }
+// })->middleware(\App\Http\Middleware\RoleMiddleware::class.':admin')->name('admin.dashboard');
 
 Route::get('/admin/formLegal', [LegalFormController::class, 'showForm'])->middleware(\App\Http\Middleware\RoleMiddleware::class.':admin')->name('form.legal');
 Route::post('/admin/formLegal', [LegalFormController::class, 'submitForm'])->middleware(\App\Http\Middleware\RoleMiddleware::class.':admin')->name('form.legal.submit');
@@ -40,9 +44,6 @@ Route::get('/admin/articles/edit', [AdminController::class, 'editArticles'])->na
 // Route::post('/consume-api', [ApiController::class, 'login']);
 Route::get('/login', [ApiController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [ApiController::class, 'login'])->name('login.submit');
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
 
 Route::post('/logout', [ApiController::class, 'logout'])->name('logout');
 
