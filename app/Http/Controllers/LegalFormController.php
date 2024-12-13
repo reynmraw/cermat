@@ -40,4 +40,48 @@ class LegalFormController extends Controller
 
         return back()->with('success', 'Form successfully submitted!');
     }
+    public function index()
+    {
+        // Get all legal forms from the database
+        $legalForms = LegalForm::all(); 
+
+        // Pass them to the view
+        return view('admin/showLegal', compact('legalForms'));
+    }
+
+    /**
+     * Show the form for editing the specified legal form.
+     */
+    public function edit($id)
+    {
+        // Find the specific legal form by ID
+        $legalForm = LegalForm::findOrFail($id);
+
+        // Pass the legal form data to the view
+        return view('admin/editLegal', compact('legalForm'));
+    }
+
+    /**
+     * Update the specified legal form in storage.
+     */
+    public function update(Request $request, $id)
+    {
+        // Validate incoming request data
+        $request->validate([
+            'judul_legal' => 'required|string|max:255',
+            'sub_judul' => 'required|string|max:255',
+            'status' => 'required|string',
+        ]);
+
+        // Find the legal form and update its values
+        $legalForm = LegalForm::findOrFail($id);
+        $legalForm->update([
+            'judul_legal' => $request->judul_legal,
+            'sub_judul' => $request->sub_judul,
+            'status' => $request->status,
+        ]);
+
+        // Redirect back to the legal forms list with a success message
+        return redirect()->route('form.legal.index')->with('success', 'Legal form updated successfully.');
+    }
 }

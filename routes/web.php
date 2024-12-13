@@ -36,8 +36,11 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 //     }
 // })->middleware(\App\Http\Middleware\RoleMiddleware::class.':admin')->name('admin.dashboard');
 
-Route::get('/admin/formLegal', [LegalFormController::class, 'showForm'])->middleware(\App\Http\Middleware\RoleMiddleware::class.':admin')->name('form.legal');
+Route::get('/admin/formLegal', [LegalFormController::class, 'showForm'])->middleware(\App\Http\Middleware\RoleMiddleware::class.':admin')->name('form.legal.form');
 Route::post('/admin/formLegal', [LegalFormController::class, 'submitForm'])->middleware(\App\Http\Middleware\RoleMiddleware::class.':admin')->name('form.legal.submit');
+Route::get('/admin/formLegal/show', [LegalFormController::class, 'index'])->middleware(\App\Http\Middleware\RoleMiddleware::class.':admin')->name('form.legal.index');
+Route::get('/admin/formLegal/{id}/edit', [LegalFormController::class, 'edit'])->middleware(\App\Http\Middleware\RoleMiddleware::class.':admin')->name('form.legal.edit');
+Route::put('/admin/formLegal/{id}', [LegalFormController::class, 'update'])->middleware(\App\Http\Middleware\RoleMiddleware::class.':admin')->name('form.legal.update');
 
 Route::get('/admin/articles/edit', [AdminController::class, 'editArticles'])->name('admin.articles.edit')->middleware(\App\Http\Middleware\RoleMiddleware::class.':editor');
 

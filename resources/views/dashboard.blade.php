@@ -18,7 +18,8 @@
     <h3>Admin Features</h3>
     <ul>
         <li><a href="{{ route('admin.articles.edit') }}">Edit Articles</a></li>
-        <li><a href="{{ route('form.legal') }}">Manage Legal Documents</a></li>
+        <li><a href="{{ route('form.legal.form') }}">Submit Legal Documents</a></li>
+        <li><a href="{{ route('form.legal.index') }}">Show Legal Documents</a></li>
         <li><a href="#">User Management</a></li>
     </ul>
 @endif
