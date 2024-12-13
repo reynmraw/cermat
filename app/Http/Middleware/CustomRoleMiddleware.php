@@ -13,7 +13,7 @@ class CustomRoleMiddleware
      */
     public function handle(Request $request, Closure $next, $role): Response
     {
-        dd('Middleware loaded');
+        // dd('Middleware loaded');
         if (session('role') !== $role) {
             return response('Unauthorized', 403);
         }

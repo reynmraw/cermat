@@ -14,5 +14,6 @@ class LegalForm extends Model
         'sub_judul',
         'file_path',
         'status',
+        'dibuat_oleh',
     ];
 }

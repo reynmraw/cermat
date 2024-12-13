@@ -86,11 +86,11 @@ class ApiController extends Controller
             // Redirect to the dashboard
             return redirect()->route('dashboard');
         } else {
-            return redirect()->route('login.form')->with('error', 'Unexpected API response format.');
+            return redirect()->route('login')->with('error', 'Unexpected API response format.');
         }
     }
 
-    return redirect()->route('login.form')->with('error', 'Login failed! Please check your credentials.');
+    return redirect()->route('login')->with('error', 'Login failed! Please check your credentials.');
 }
     
     public function logout()
@@ -101,6 +101,6 @@ class ApiController extends Controller
         // Cookie::queue(Cookie::forget('laravel_session'));
         // Cookie::queue(Cookie::forget('XSRF-TOKEN'));   
 
-        return redirect()->route('login.form')->with('success', 'You have been logged out.');
+        return redirect()->route('login')->with('success', 'You have been logged out.');
     }
 }

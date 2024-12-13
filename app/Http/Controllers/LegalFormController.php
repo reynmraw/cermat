@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\LegalForm;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class LegalFormController extends Controller
 {
@@ -33,6 +35,7 @@ class LegalFormController extends Controller
             'sub_judul' => $request->sub_judul,
             'file_path' => $filePath,
             'status' => $request->status,
+            'dibuat_oleh' => Auth::user()->name,
         ]);
 
         return back()->with('success', 'Form successfully submitted!');

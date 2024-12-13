@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('sub_judul');
             $table->string('file_path');
             $table->string('status');
+            $table->string('dibuat_oleh');
             $table->timestamps();
         });
     }

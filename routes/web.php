@@ -10,7 +10,7 @@ use App\Http\Controllers\DashboardController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
 
 // Route::get('/dashboard', function () {
@@ -42,15 +42,15 @@ Route::post('/admin/formLegal', [LegalFormController::class, 'submitForm'])->mid
 Route::get('/admin/articles/edit', [AdminController::class, 'editArticles'])->name('admin.articles.edit')->middleware(\App\Http\Middleware\RoleMiddleware::class.':editor');
 
 // Route::post('/consume-api', [ApiController::class, 'login']);
-Route::get('/login', [ApiController::class, 'showLoginForm'])->name('login.form');
+Route::get('/login', [ApiController::class, 'showLoginForm'])->name('login')->middleware('guest');
 Route::post('/login', [ApiController::class, 'login'])->name('login.submit');
 
 Route::post('/logout', [ApiController::class, 'logout'])->name('logout');
 
-Route::get('/test-role', function () {
-    $middleware = new \App\Http\Middleware\RoleMiddleware;
+// Route::get('/test-role', function () {
+//     $middleware = new \App\Http\Middleware\RoleMiddleware;
 
-    return $middleware->handle(request(), function () {
-        return response('Middleware executed successfully!', 200);
-    }, 'admin');
-});
+//     return $middleware->handle(request(), function () {
+//         return response('Middleware executed successfully!', 200);
+//     }, 'admin');
+// });
