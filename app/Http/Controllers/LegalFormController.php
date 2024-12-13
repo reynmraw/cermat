@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\LegalForm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
 
 
 class LegalFormController extends Controller
@@ -37,6 +39,9 @@ class LegalFormController extends Controller
             'status' => $request->status,
             'dibuat_oleh' => Auth::user()->name,
         ]);
+
+        $user = Auth::user();
+        Log::info("Form Submitted", ['name' => $user->name]);
 
         return back()->with('success', 'Form successfully submitted!');
     }
@@ -80,6 +85,9 @@ class LegalFormController extends Controller
             'sub_judul' => $request->sub_judul,
             'status' => $request->status,
         ]);
+
+        $user = Auth::user();
+        Log::info("Form Updated", ['name' => $user->name]);
 
         // Redirect back to the legal forms list with a success message
         return redirect()->route('form.legal.index')->with('success', 'Legal form updated successfully.');

@@ -6,12 +6,13 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LegalFormController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LogController;
 
 
 
 Route::get('/', function () {
     return view('login');
-});
+})->middleware('guest');;
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -41,6 +42,9 @@ Route::post('/admin/formLegal', [LegalFormController::class, 'submitForm'])->mid
 Route::get('/admin/formLegal/show', [LegalFormController::class, 'index'])->middleware(\App\Http\Middleware\RoleMiddleware::class.':admin')->name('form.legal.index');
 Route::get('/admin/formLegal/{id}/edit', [LegalFormController::class, 'edit'])->middleware(\App\Http\Middleware\RoleMiddleware::class.':admin')->name('form.legal.edit');
 Route::put('/admin/formLegal/{id}', [LegalFormController::class, 'update'])->middleware(\App\Http\Middleware\RoleMiddleware::class.':admin')->name('form.legal.update');
+
+Route::get('/admin/logs', [LogController::class, 'index'])->middleware(\App\Http\Middleware\RoleMiddleware::class.':admin')->name('logs');
+
 
 Route::get('/admin/articles/edit', [AdminController::class, 'editArticles'])->name('admin.articles.edit')->middleware(\App\Http\Middleware\RoleMiddleware::class.':editor');
 

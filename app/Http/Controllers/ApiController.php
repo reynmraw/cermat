@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Log;
 
 class ApiController extends Controller
 {
@@ -82,6 +83,7 @@ class ApiController extends Controller
             );
 
             Auth::login($user,true);
+            Log::info("User Logged In", ['name' => $user->name]);
 
             // Redirect to the dashboard
             return redirect()->route('dashboard');
@@ -95,6 +97,8 @@ class ApiController extends Controller
     
     public function logout()
     {
+        $user = Auth::user();
+        Log::info("User Logged Out", ['name' => $user->name]);
         Auth::logout();
         // Clear the session
         session()->flush();    
